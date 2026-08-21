@@ -10,6 +10,9 @@ const formatMoney = (value, currency = 'EUR') =>
 
 const translations = {
     ru: {
+        documentLabel: 'Сводный документ',
+        documentTitle: 'Экономика турнира',
+        pageTitle: 'Экономика и маржа',
         parameters: 'Параметры',
         averageBet: 'Средняя ставка',
         rtp: 'RTP, %',
@@ -48,6 +51,9 @@ const translations = {
         legend4: 'Маржа — 4% от каждой ставки (при RTP 96%)',
     },
     en: {
+        documentLabel: 'Summary Document',
+        documentTitle: 'Tournament Economics',
+        pageTitle: 'Economics and Margin',
         parameters: 'Parameters',
         averageBet: 'Avg bet',
         rtp: 'RTP, %',
@@ -237,8 +243,8 @@ function TournamentEconomics() {
         <div className={styles.document}>
             <div className={styles.toolbar}>
                 <div>
-                    <span>Сводный документ</span>
-                    <h2>Экономика турнира</h2>
+                    <span>{t.documentLabel}</span>
+                    <h2>{t.documentTitle}</h2>
                 </div>
                 <div className={styles.toolbarActions}>
                     <button
@@ -274,7 +280,7 @@ function TournamentEconomics() {
                     <header>
                         <div>
                             <span>TOURNAMENT-STUDIO · TOURNAMENT</span>
-                            <h3>Экономика и маржа</h3>
+                            <h3>{t.pageTitle}</h3>
                         </div>
                         <strong>01/01</strong>
                     </header>
