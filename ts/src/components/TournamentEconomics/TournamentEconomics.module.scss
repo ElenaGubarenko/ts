@@ -1,0 +1,707 @@
+// TournamentEconomics.module.scss
+
+// Основные переменные
+$bg-primary: #0f141b;
+$bg-secondary: #171c24;
+$bg-input: #10141b;
+$border-color: #2a313d;
+$text-primary: #e2e8f0;
+$text-secondary: #8b95a5;
+$text-muted: #6b7686;
+$accent-purple: #7567e8;
+$accent-teal: #35c6b5;
+$radius-xs: 6px;
+$radius-sm: 10px;
+$radius-md: 14px;
+$radius-lg: 18px;
+$transition: 0.15s ease;
+
+.document {
+    overflow: hidden;
+    border: 1px solid $border-color;
+    border-radius: $radius-lg;
+    background: $bg-primary;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+// Тулбар
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid $border-color;
+    background: $bg-secondary;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    > div:first-child {
+        span {
+            display: block;
+            color: $accent-purple;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0;
+            color: $text-primary;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+    }
+}
+
+.toolbarActions {
+    display: flex;
+    gap: 0.375rem;
+    align-items: center;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+
+    button {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #394150;
+        border-radius: $radius-xs;
+        color: $text-secondary;
+        background: $bg-input;
+        cursor: pointer;
+        font-size: 0.7rem;
+        font-weight: 500;
+        transition: all $transition;
+        white-space: nowrap;
+        line-height: 1;
+        min-height: 32px;
+
+        &:hover {
+            border-color: #4a5568;
+            color: $text-primary;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        &:active {
+            transform: scale(0.97);
+            box-shadow: none;
+        }
+    }
+
+    .active {
+        border-color: $accent-purple;
+        color: white;
+        background: $accent-purple;
+        
+        &:hover {
+            background: lighten($accent-purple, 5%);
+            border-color: lighten($accent-purple, 5%);
+        }
+    }
+
+    .saveButton {
+        border-color: $accent-teal;
+        color: #7ed1c7;
+        background: rgba(53, 198, 181, 0.1);
+        
+        &:hover {
+            border-color: #4dd8c8;
+            color: white;
+            background: rgba(53, 198, 181, 0.2);
+        }
+        
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.pages {
+    padding: 1rem;
+}
+
+.page {
+    display: block;
+    padding: 1.25rem;
+    color: $text-primary;
+    background: radial-gradient(circle at 92% 4%, rgba(117, 103, 232, 0.06), transparent 30%), $bg-primary;
+    border-radius: $radius-md;
+    border: 1px solid $border-color;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid $border-color;
+
+        > div {
+            span {
+                display: block;
+                color: $accent-purple;
+                font-size: 0.6rem;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+
+            h3 {
+                margin: 0.25rem 0 0;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+        }
+
+        > strong {
+            color: #414a59;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+    }
+}
+
+// Основные параметры - 5 в ряд (компактные)
+.modelInputs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.5rem;
+    margin-bottom: 0.875rem;
+    width: 100%;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.5rem;
+        border: 1px solid $border-color;
+        border-radius: $radius-sm;
+        background: $bg-secondary;
+        transition: all $transition;
+        min-width: 0;
+
+        &:hover {
+            border-color: lighten($border-color, 10%);
+        }
+
+        &:focus-within {
+            border-color: $accent-purple;
+            box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+        }
+
+        span {
+            color: $text-secondary;
+            font-size: 0.55rem;
+            font-weight: 600;
+            line-height: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.3rem 0.4rem;
+            border: 1px solid #343d4b;
+            border-radius: $radius-xs;
+            color: $text-primary;
+            background: $bg-input;
+            font-size: 0.7rem;
+            font-weight: 500;
+            line-height: 1.1;
+            transition: all $transition;
+            min-width: 0;
+            height: 28px;
+            
+            &:hover {
+                border-color: #4a5568;
+            }
+            
+            &:focus {
+                outline: none;
+                border-color: $accent-purple;
+                box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+            }
+        }
+
+        small {
+            color: $text-muted;
+            font-size: 0.5rem;
+            line-height: 1.1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 0.55rem;
+        }
+    }
+}
+
+// Сценарии - 3 в ряд
+.scenarioInputs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.875rem;
+        border: 1px solid;
+        border-radius: $radius-sm;
+        transition: all $transition;
+        min-width: 0;
+
+        &:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        &:focus-within {
+            border-color: $accent-purple;
+            box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+        }
+
+        span {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5rem 0.625rem;
+            border: 1px solid;
+            border-radius: $radius-xs;
+            color: $text-primary;
+            background: $bg-input;
+            font-size: 0.8rem;
+            font-weight: 500;
+            line-height: 1.2;
+            min-width: 0;
+            transition: all $transition;
+            
+            &:hover {
+                border-color: lighten(#343d4b, 10%);
+            }
+            
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+            }
+        }
+
+        small {
+            color: $text-muted;
+            font-size: 0.65rem;
+            line-height: 1.2;
+        }
+    }
+}
+
+// Карточки сценариев - 3 в ряд
+.economicsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    article {
+        padding: 1rem;
+        border: 1px solid;
+        border-radius: $radius-md;
+        transition: all $transition;
+        min-width: 0;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        > span {
+            display: block;
+            color: $text-secondary;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        > strong {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.625rem;
+            line-height: 1.2;
+        }
+
+        dl {
+            margin: 0;
+            
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.375rem 0;
+                border-top: 1px solid rgba(255, 255, 255, 0.04);
+                
+                &:first-child {
+                    border-top: none;
+                    padding-top: 0;
+                }
+                
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
+
+            dt {
+                color: $text-secondary;
+                font-size: 0.65rem;
+                font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            dd {
+                margin: 0;
+                font-size: 0.7rem;
+                font-weight: 600;
+                color: $text-primary;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
+        }
+    }
+}
+
+// Формулы - 2 в ряд
+.economicsFormula {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    > div {
+        padding: 1rem;
+        border: 1px solid rgba(117, 103, 232, 0.2);
+        border-radius: $radius-md;
+        background: linear-gradient(145deg, rgba(117, 103, 232, 0.08), rgba(117, 103, 232, 0.02));
+        min-width: 0;
+        transition: all $transition;
+        backdrop-filter: blur(10px);
+
+        &:hover {
+            border-color: rgba(117, 103, 232, 0.4);
+            box-shadow: 0 4px 16px rgba(117, 103, 232, 0.1);
+        }
+
+        &:last-child {
+            border-color: rgba(53, 198, 181, 0.2);
+            background: linear-gradient(145deg, rgba(53, 198, 181, 0.08), rgba(53, 198, 181, 0.02));
+            
+            &:hover {
+                border-color: rgba(53, 198, 181, 0.4);
+                box-shadow: 0 4px 16px rgba(53, 198, 181, 0.1);
+            }
+        }
+
+        span {
+            display: block;
+            color: #9d93f1;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            line-height: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        strong {
+            display: block;
+            margin-top: 0.375rem;
+            color: $text-primary;
+            font-size: 0.7rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        code {
+            display: block;
+            margin-top: 0.375rem;
+            padding: 0.5rem;
+            color: #7ed1c7;
+            font-size: 0.65rem;
+            line-height: 1.3;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: $radius-xs;
+            word-break: break-word;
+        }
+
+        p {
+            margin: 0.375rem 0 0;
+            padding-top: 0.375rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            color: $text-secondary;
+            font-size: 0.6rem;
+            line-height: 1.3;
+        }
+    }
+}
+
+// Легенда
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem;
+    padding: 0.875rem 0;
+    margin-bottom: 0.875rem;
+    border-top: 1px solid $border-color;
+    
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        color: $text-secondary;
+        font-size: 0.65rem;
+        transition: color $transition;
+        
+        &:hover {
+            color: $text-primary;
+        }
+        
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: $accent-purple;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(117, 103, 232, 0.5);
+        }
+    }
+}
+
+// Дисклеймер
+.disclaimer {
+    padding: 0.875rem 1rem;
+    border: 1px solid $border-color;
+    border-radius: $radius-sm;
+    color: $text-muted;
+    background: $bg-secondary;
+    font-size: 0.6rem;
+    line-height: 1.3;
+
+    p {
+        margin: 0;
+        
+        &:not(:last-child) {
+            margin-bottom: 0.375rem;
+        }
+    }
+}
+
+// Адаптивность
+@media (max-width: 1024px) {
+    .document {
+        max-width: 100%;
+    }
+    
+    .modelInputs {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 0.4rem;
+        
+        label {
+            padding: 0.4rem;
+            
+            input {
+                height: 26px;
+            }
+        }
+    }
+    
+    .economicsFormula {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.625rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.625rem;
+    }
+
+    .toolbarActions {
+        width: 100%;
+        flex-wrap: wrap;
+        
+        button {
+            flex: 1;
+            text-align: center;
+            min-width: calc(50% - 0.375rem);
+        }
+    }
+
+    .pages {
+        padding: 0.625rem;
+    }
+
+    .page {
+        padding: 0.875rem;
+    }
+
+    // На планшете показываем 3 в первом ряду и 2 во втором
+    .modelInputs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.4rem;
+        
+        // Последние 2 элемента растягиваем
+        label:nth-child(4),
+        label:nth-child(5) {
+            grid-column: span 1.5;
+        }
+    }
+
+    // Оставляем 3 в ряд для сценариев на планшете
+    .scenarioInputs,
+    .economicsGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.625rem;
+    }
+
+    // Формулы остаются в 2 колонки даже на планшете
+    .economicsFormula {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.625rem;
+        
+        > div {
+            padding: 0.875rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .toolbarActions {
+        gap: 0.25rem;
+        
+        button {
+            min-width: calc(50% - 0.25rem);
+            font-size: 0.65rem;
+            padding: 0.4rem 0.5rem;
+        }
+    }
+
+    // На мобильном - 2 в ряд
+    .modelInputs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.3rem;
+        
+        label:nth-child(4),
+        label:nth-child(5) {
+            grid-column: auto;
+        }
+        
+        label {
+            padding: 0.3rem;
+            
+            input {
+                height: 24px;
+                font-size: 0.65rem;
+            }
+        }
+    }
+
+    .scenarioInputs,
+    .economicsGrid {
+        grid-template-columns: 1fr;
+    }
+    
+    // На очень маленьких экранах формулы могут стать в 1 колонку
+    .economicsFormula {
+        grid-template-columns: 1fr;
+        gap: 0.625rem;
+    }
+}
+
+// Печать
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 8mm;
+    }
+
+    :global(body *) {
+        visibility: hidden;
+    }
+
+    .document,
+    .document * {
+        visibility: visible;
+    }
+
+    .document {
+        position: absolute;
+        inset: 0;
+        width: 190mm;
+        max-width: none;
+        overflow: visible;
+        border: 0;
+        background: $bg-primary;
+    }
+
+    .toolbar {
+        display: none;
+    }
+
+    .pages {
+        padding: 0;
+    }
+
+    .page {
+        display: block;
+        box-sizing: border-box;
+        width: 190mm;
+        height: auto;
+        min-height: auto;
+        padding: 5mm;
+        overflow: visible;
+        break-after: auto;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .modelInputs,
+    .scenarioInputs,
+    .economicsGrid,
+    .economicsFormula {
+        break-inside: avoid;
+    }
+}

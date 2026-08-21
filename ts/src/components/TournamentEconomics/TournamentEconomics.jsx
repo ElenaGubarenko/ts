@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './SummaryDocument.module.scss';
+import styles from './TournamentEconomics.module.scss';
 
 const formatNumber = (value) => new Intl.NumberFormat('ru-RU', {
     maximumFractionDigits: 2,
@@ -114,13 +114,14 @@ const scenarioColors = [
 
 function TournamentEconomics() {
     const [language, setLanguage] = useState('ru');
+    // Храним значения как строки, чтобы можно было очистить поле
     const [averageBet, setAverageBet] = useState('0.2');
     const [expectedRtp, setExpectedRtp] = useState('96');
     const [participantCompletionRate, setParticipantCompletionRate] = useState('100');
     const [desiredTournamentIncome, setDesiredTournamentIncome] = useState('10000');
     const [prizePool, setPrizePool] = useState('5000');
     const [marginParticipantScenarios, setMarginParticipantScenarios] = useState([
-        500, 1000, 5000,
+        '500', '1000', '5000',
     ]);
     const [isSaving, setIsSaving] = useState(false);
 
@@ -128,14 +129,15 @@ function TournamentEconomics() {
 
     const updateScenario = (index, value) => {
         const scenarios = [...marginParticipantScenarios];
-        scenarios[index] = Number(value);
+        scenarios[index] = value; // Сохраняем как строку
         setMarginParticipantScenarios(scenarios);
     };
 
     const handleIncomeChange = (value) => {
         setDesiredTournamentIncome(value);
         const income = Number(value) || 0;
-        setPrizePool(String(income * 0.5));
+        // Устанавливаем prizePool только если value не пустое
+        setPrizePool(value === '' ? '' : String(income * 0.5));
     };
 
     const handlePrint = () => {
@@ -195,7 +197,6 @@ function TournamentEconomics() {
     };
 
     const rtp = Math.min(100, Math.max(0, Number(expectedRtp) || 0));
-    // Убираем ограничение в 100% для completionRate
     const completionRate = Math.max(0, Number(participantCompletionRate) || 0);
     const targetIncome = Number(desiredTournamentIncome) || 0;
     const targetPrizePool = Number(prizePool) || 0;
@@ -203,19 +204,18 @@ function TournamentEconomics() {
     const marginRate = (100 - rtp) / 100; // 0.04 при RTP 96%
     const netIncome = Math.max(0, targetIncome - targetPrizePool);
 
-    const calculateScenario = (participants) => {
+    const calculateScenario = (participantsStr) => {
+        const participants = Number(participantsStr) || 0;
+        
         // Чистый доход с одного игрока (не зависит от процента выполнения)
         const netIncomePerPlayer = participants > 0 ? netIncome / participants : 0;
         
         // Спины = доход с игрока / (ставка × маржа)
-        // Это количество спинов, которое нужно для получения нужного дохода
         const spinsPerPlayer = bet > 0 && marginRate > 0
             ? netIncomePerPlayer / (bet * marginRate)
             : 0;
 
         // Оборот с учетом процента выполнения дистанции
-        // Если completionRate = 100%, то оборот полный
-        // Если completionRate = 200%, то оборот удваивается
         const turnover = participants * spinsPerPlayer * bet * completionRate / 100;
         
         // Общий доход = оборот × маржа
@@ -284,52 +284,53 @@ function TournamentEconomics() {
                         <label>
                             <span>{t.averageBet}</span>
                             <input
-                                type="number"
-                                min="0"
-                                step="0.01"
+                                type="text"
+                                inputMode="decimal"
                                 value={averageBet}
                                 onChange={(e) => setAverageBet(e.target.value)}
+                                placeholder="0"
                             />
                         </label>
                         <label>
                             <span>{t.rtp}</span>
                             <input
-                                type="number"
-                                min="0"
-                                max="100"
+                                type="text"
+                                inputMode="numeric"
                                 value={expectedRtp}
                                 onChange={(e) => setExpectedRtp(e.target.value)}
+                                placeholder="0"
                             />
                         </label>
                         <label>
                             <span>{t.completionRate}</span>
                             <input
-                                type="number"
-                                min="0"
+                                type="text"
+                                inputMode="numeric"
                                 value={participantCompletionRate}
                                 onChange={(e) => setParticipantCompletionRate(e.target.value)}
+                                placeholder="0"
                             />
                             <small>{t.completionRateHint}</small>
                         </label>
                         <label>
                             <span>{t.desiredIncome}</span>
                             <input
-                                type="number"
-                                min="0"
-                                step="100"
+                                type="text"
+                                inputMode="decimal"
                                 value={desiredTournamentIncome}
                                 onChange={(e) => handleIncomeChange(e.target.value)}
+                                placeholder="0"
                             />
                             <small>{t.desiredIncomeHint}</small>
                         </label>
                         <label>
                             <span>{t.prizePool}</span>
                             <input
-                                type="number"
-                                min="0"
-                                step="100"
+                                type="text"
+                                inputMode="decimal"
                                 value={prizePool}
                                 onChange={(e) => setPrizePool(e.target.value)}
+                                placeholder="0"
                             />
                             <small>{t.prizePoolHint}</small>
                         </label>
@@ -349,10 +350,11 @@ function TournamentEconomics() {
                                     {t.scenario} {index + 1}
                                 </span>
                                 <input
-                                    type="number"
-                                    min="0"
+                                    type="text"
+                                    inputMode="numeric"
                                     value={participants}
                                     onChange={(e) => updateScenario(index, e.target.value)}
+                                    placeholder="0"
                                     style={{
                                         borderColor: scenarioColors[index].inputBorder,
                                     }}
@@ -377,7 +379,7 @@ function TournamentEconomics() {
                                     }}
                                 >
                                     <span style={{ color: colors.accent }}>
-                                        {t.scenario} {index + 1} · {formatNumber(participants)} {t.participantsLabel}
+                                        {t.scenario} {index + 1} · {formatNumber(scenario.participants)} {t.participantsLabel}
                                     </span>
                                     <strong style={{ color: colors.accent }}>
                                         {formatNumber(scenario.spinsPerPlayer)} {t.spins}
