@@ -1,0 +1,463 @@
+// SummaryDocument.module.scss
+
+.document {
+    overflow: hidden;
+    border: 0.0625rem solid #303744; // 1px
+    border-radius: 0.75rem; // 12px
+    background: #10141b;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.625rem 0.875rem; // 10px 14px
+    border-bottom: 0.0625rem solid #303744; // 1px
+    background: #121720;
+
+    > div:first-child {
+        span {
+            display: block;
+            color: #7d8bff;
+            font-size: 0.5625rem; // 9px
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            margin: 0.125rem 0 0;
+            color: #eef1f7;
+            font-size: 0.875rem; // 14px
+            font-weight: 600;
+        }
+    }
+}
+
+.toolbarActions {
+    display: flex;
+    gap: 0.3125rem; // 5px
+    align-items: center;
+
+    button {
+        padding: 0.375rem 0.5625rem; // 6px 9px
+        border: 0.0625rem solid #394150; // 1px
+        border-radius: 0.5rem; // 8px
+        color: #b8c0ce;
+        background: #1c212a;
+        cursor: pointer;
+        font-size: 0.5625rem; // 9px
+        font-weight: 600;
+        transition: all 0.15s ease;
+
+        &:hover {
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+    }
+
+    .active {
+        border-color: #7567e8;
+        color: #ffffff;
+        background: #594ec0;
+    }
+
+    .saveButton {
+        border-color: #35c6b5;
+        color: #7ed1c7;
+        background: rgba(53, 198, 181, 0.1);
+        
+        &:hover {
+            border-color: #4dd8c8;
+            color: #ffffff;
+            background: rgba(53, 198, 181, 0.2);
+        }
+    }
+}
+
+.pages {
+    padding: 0.75rem; // 12px
+}
+
+.page {
+    display: block;
+    min-height: auto;
+    padding: 1rem; // 16px
+    color: #dce2ec;
+    background: radial-gradient(circle at 92% 4%, rgba(117, 103, 232, 0.09), transparent 28%), #10141b;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 0.75rem; // 12px
+        border-bottom: 0.0625rem solid #2a313d; // 1px
+
+        > div {
+            span {
+                display: block;
+                color: #7d8bff;
+                font-size: 0.5625rem; // 9px
+                font-weight: 800;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+            }
+
+            h3 {
+                margin: 0.1875rem 0 0;
+                font-size: 1.0625rem; // 17px
+                font-weight: 600;
+                letter-spacing: -0.01em;
+            }
+        }
+
+        > strong {
+            color: #414a59;
+            font-size: 0.875rem; // 14px
+            font-weight: 700;
+        }
+    }
+}
+
+// Основные параметры
+.modelInputs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.4375rem; // 7px
+    margin-top: 0.75rem; // 12px
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1875rem; // 3px
+        padding: 0.4375rem; // 7px
+        border: 0.0625rem solid #29313d; // 1px
+        border-radius: 0.4375rem; // 7px
+        background: #171c24;
+
+        span {
+            color: #8d97a7;
+            font-size: 0.5rem; // 8px
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.3125rem 0.375rem; // 5px 6px
+            border: 0.0625rem solid #343d4b; // 1px
+            border-radius: 0.375rem; // 6px
+            color: #e3e8f0;
+            background: #10141b;
+            font-size: 0.625rem; // 10px
+            transition: border-color 0.15s ease;
+            
+            &:focus {
+                outline: none;
+                border-color: #7567e8;
+            }
+        }
+
+        small {
+            color: #6b7686;
+            font-size: 0.4375rem; // 7px
+            line-height: 1.3;
+        }
+    }
+}
+
+// Сценарии
+.scenarioInputs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4375rem; // 7px
+    margin-top: 0.375rem; // 6px
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1875rem; // 3px
+        padding: 0.4375rem; // 7px
+        border: 0.0625rem solid; // 1px
+        border-radius: 0.4375rem; // 7px
+        transition: all 0.2s ease;
+
+        span {
+            font-size: 0.5rem; // 8px
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.3125rem 0.375rem; // 5px 6px
+            border: 0.0625rem solid; // 1px
+            border-radius: 0.375rem; // 6px
+            color: #e3e8f0;
+            background: #0f141b;
+            font-size: 0.625rem; // 10px
+            
+            &:focus {
+                outline: none;
+            }
+        }
+
+        small {
+            color: #6b7686;
+            font-size: 0.4375rem; // 7px
+            line-height: 1.3;
+        }
+    }
+}
+
+// Карточки сценариев
+.economicsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4375rem; // 7px
+    margin-top: 0.375rem; // 6px
+
+    article {
+        padding: 0.5625rem; // 9px
+        border: 0.0625rem solid; // 1px
+        border-radius: 0.5625rem; // 9px
+        transition: all 0.2s ease;
+
+        > span {
+            display: block;
+            color: #8791a0;
+            font-size: 0.5rem; // 8px
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        > strong {
+            display: block;
+            margin-top: 0.1875rem; // 3px
+            font-size: 0.75rem; // 12px
+            font-weight: 600;
+        }
+
+        dl {
+            margin: 0.5rem 0 0; // 8px
+            
+            div {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                gap: 0.3125rem; // 5px
+                padding: 0.1875rem 0; // 3px
+                border-top: 0.0625rem solid #29313d; // 1px
+                
+                &:first-child {
+                    border-top: none;
+                }
+            }
+
+            dt {
+                color: #818c9c;
+                font-size: 0.5rem; // 8px
+            }
+
+            dd {
+                margin: 0;
+                font-size: 0.5625rem; // 9px
+                font-weight: 700;
+                color: #e2e8f0;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+// Формулы
+.economicsFormula {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.4375rem; // 7px
+    margin: 0.75rem 0; // 12px
+
+    > div {
+        padding: 0.625rem 0.75rem; // 10px 12px
+        border: 0.0625rem solid rgba(117, 103, 232, 0.25); // 1px
+        border-radius: 0.5625rem; // 9px
+        background: linear-gradient(145deg, rgba(117, 103, 232, 0.12), rgba(117, 103, 232, 0.03));
+
+        &:last-child {
+            border-color: rgba(53, 198, 181, 0.28);
+            background: linear-gradient(145deg, rgba(53, 198, 181, 0.12), rgba(53, 198, 181, 0.03));
+        }
+
+        span {
+            display: block;
+            color: #9d93f1;
+            font-size: 0.5rem; // 8px
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        strong {
+            display: block;
+            margin-top: 0.3125rem; // 5px
+            color: #edf1f7;
+            font-size: 0.625rem; // 10px
+            font-weight: 600;
+        }
+
+        code {
+            display: block;
+            margin-top: 0.25rem; // 4px
+            color: #7ed1c7;
+            font-size: 0.5625rem; // 9px
+            line-height: 1.4;
+            white-space: normal;
+        }
+
+        p {
+            margin: 0.375rem 0 0; // 6px
+            padding-top: 0.375rem; // 6px
+            border-top: 0.0625rem solid rgba(255, 255, 255, 0.05); // 1px
+            color: #8b95a5;
+            font-size: 0.5rem; // 8px
+            line-height: 1.4;
+        }
+    }
+}
+
+// Легенда
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; // 8px
+    margin-top: 0.375rem; // 6px
+    padding: 0.375rem; // 6px
+    border-top: 0.0625rem solid #29313d; // 1px
+    
+    span {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem; // 4px
+        color: #8b95a5;
+        font-size: 0.5rem; // 8px
+        
+        &::before {
+            content: '';
+            display: inline-block;
+            width: 0.25rem; // 4px
+            height: 0.25rem; // 4px
+            border-radius: 50%;
+            background: #7567e8;
+            flex-shrink: 0;
+        }
+    }
+}
+
+// Дисклеймер
+.disclaimer {
+    margin-top: 0.375rem; // 6px
+    padding: 0.5rem 0.625rem; // 8px 10px
+    border: 0.0625rem solid #29313d; // 1px
+    border-radius: 0.5rem; // 8px
+    color: #6b7686;
+    background: #171c24;
+    font-size: 0.5rem; // 8px
+    line-height: 1.4;
+
+    p {
+        margin: 0;
+        
+        &:not(:last-child) {
+            margin-bottom: 0.25rem; // 4px
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .toolbarActions {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .page {
+        padding: 0.625rem; // 10px
+    }
+
+    .modelInputs {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .scenarioInputs {
+        grid-template-columns: 1fr;
+    }
+
+    .economicsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .economicsFormula {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 8mm;
+    }
+
+    :global(body *) {
+        visibility: hidden;
+    }
+
+    .document,
+    .document * {
+        visibility: visible;
+    }
+
+    .document {
+        position: absolute;
+        inset: 0;
+        width: 190mm;
+        overflow: visible;
+        border: 0;
+        background: #0f141b;
+    }
+
+    .toolbar {
+        display: none;
+    }
+
+    .pages {
+        padding: 0;
+    }
+
+    .page {
+        display: block;
+        box-sizing: border-box;
+        width: 190mm;
+        height: auto;
+        min-height: auto;
+        padding: 5mm;
+        overflow: visible;
+        break-after: auto;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .modelInputs,
+    .scenarioInputs,
+    .economicsGrid,
+    .economicsFormula {
+        break-inside: avoid;
+    }
+}

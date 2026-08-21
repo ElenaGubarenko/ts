@@ -1,0 +1,28 @@
+
+.page {
+    --workspace-accent: #9181e8;
+    --workspace-accent-rgb: 145, 129, 232;
+
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    padding-bottom: 3rem;
+    isolation: isolate;
+}
+
+.page::before {
+    position: absolute;
+    z-index: -1;
+    inset: -2rem -4rem;
+    border-radius: 40px;
+    background: radial-gradient(
+        circle at 18% 12%,
+        rgba(var(--workspace-accent-rgb), 0.1),
+        transparent 36%
+    );
+    content: '';
+    pointer-events: none;
+    transition: background 300ms ease;
+}
