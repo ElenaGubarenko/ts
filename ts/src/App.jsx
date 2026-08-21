@@ -7,9 +7,9 @@ function App() {
 
   return (
     
-    <div className={styles.page}>
+    // <div className={styles.page}>
     <TournamentEconomics></TournamentEconomics>
-    </div>
+    // </div>
   )
 }
 

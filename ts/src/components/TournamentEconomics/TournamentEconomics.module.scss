@@ -10,10 +10,10 @@ $text-secondary: #8b95a5;
 $text-muted: #6b7686;
 $accent-purple: #7567e8;
 $accent-teal: #35c6b5;
-$radius-xs: 6px;
-$radius-sm: 10px;
-$radius-md: 14px;
-$radius-lg: 18px;
+$radius-xs: 4px;
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
 $transition: 0.15s ease;
 
 .document {
@@ -22,7 +22,7 @@ $transition: 0.15s ease;
     border-radius: $radius-lg;
     background: $bg-primary;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    max-width: 100%;
+    max-width: 1200px; // Максимальная ширина для десктопов
     width: 100%;
     margin: 0 auto;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
@@ -33,8 +33,8 @@ $transition: 0.15s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 1rem;
+    padding: 0.875rem 1rem;
     border-bottom: 1px solid $border-color;
     background: $bg-secondary;
     position: sticky;
@@ -48,18 +48,20 @@ $transition: 0.15s ease;
         span {
             display: block;
             color: $accent-purple;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             letter-spacing: 0.06em;
             text-transform: uppercase;
+            line-height: 1.4;
         }
 
         h2 {
-            margin: 0;
+            margin: 0.125rem 0 0;
             color: $text-primary;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             white-space: nowrap;
+            line-height: 1.4;
         }
     }
 }
@@ -68,12 +70,11 @@ $transition: 0.15s ease;
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    flex-shrink: 1;
+    flex-shrink: 0;
     flex-wrap: nowrap;
-    min-width: 0;
 
     button {
-        padding: 0.25rem 0.4rem;
+        padding: 0.375rem 0.625rem;
         border: 1px solid #394150;
         border-radius: $radius-xs;
         color: $text-secondary;
@@ -83,21 +84,18 @@ $transition: 0.15s ease;
         font-weight: 500;
         transition: all $transition;
         white-space: nowrap;
-        line-height: 1;
-        min-height: 24px;
-        flex-shrink: 1;
-        min-width: 0;
+        line-height: 1.3;
+        min-height: 28px;
+        flex-shrink: 0;
 
         &:hover {
             border-color: #4a5568;
             color: $text-primary;
-            // transform: translateY(-1px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            background: lighten($bg-input, 3%);
         }
 
         &:active {
-            // transform: scale(0.97);
-            box-shadow: none;
+            transform: scale(0.97);
         }
     }
 
@@ -127,14 +125,12 @@ $transition: 0.15s ease;
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
-            box-shadow: none;
         }
     }
 }
 
 .pages {
     padding: 1rem;
-    overflow: hidden;
 }
 
 .page {
@@ -144,8 +140,7 @@ $transition: 0.15s ease;
     background: radial-gradient(circle at 92% 4%, rgba(117, 103, 232, 0.06), transparent 30%), $bg-primary;
     border-radius: $radius-md;
     border: 1px solid $border-color;
-    overflow: hidden;
-
+    
     header {
         display: flex;
         justify-content: space-between;
@@ -158,47 +153,46 @@ $transition: 0.15s ease;
             span {
                 display: block;
                 color: $accent-purple;
-                font-size: 0.6rem;
+                font-size: 0.55rem;
                 font-weight: 700;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
+                line-height: 1.4;
             }
 
             h3 {
                 margin: 0.25rem 0 0;
-                font-size: 1rem;
+                font-size: 0.95rem;
                 font-weight: 600;
+                line-height: 1.4;
             }
         }
 
         > strong {
             color: #414a59;
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 600;
         }
     }
 }
 
-// Основные параметры - 5 в ряд (компактные)
+// Основные параметры
 .modelInputs {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0.5rem;
-    margin-bottom: 0.875rem;
-    width: 100%;
-    overflow: hidden;
+    gap: 0.625rem;
+    margin-bottom: 1rem;
 
     label {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
-        padding: 0.5rem;
+        padding: 0.625rem;
         border: 1px solid $border-color;
         border-radius: $radius-sm;
         background: $bg-secondary;
         transition: all $transition;
         min-width: 0;
-        overflow: hidden;
 
         &:hover {
             border-color: lighten($border-color, 10%);
@@ -206,14 +200,14 @@ $transition: 0.15s ease;
 
         &:focus-within {
             border-color: $accent-purple;
-            box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+            box-shadow: 0 0 0 2px rgba(117, 103, 232, 0.1);
         }
 
         span {
             color: $text-secondary;
             font-size: 0.55rem;
             font-weight: 600;
-            line-height: 1;
+            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -221,17 +215,16 @@ $transition: 0.15s ease;
 
         input {
             width: 100%;
-            padding: 0.3rem 0.4rem;
+            padding: 0.375rem 0.5rem;
             border: 1px solid #343d4b;
             border-radius: $radius-xs;
             color: $text-primary;
             background: $bg-input;
             font-size: 0.7rem;
             font-weight: 500;
-            line-height: 1.1;
+            line-height: 1.3;
             transition: all $transition;
-            min-width: 0;
-            height: 28px;
+            height: 30px;
             
             &:hover {
                 border-color: #4a5568;
@@ -240,58 +233,52 @@ $transition: 0.15s ease;
             &:focus {
                 outline: none;
                 border-color: $accent-purple;
-                box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+                box-shadow: 0 0 0 2px rgba(117, 103, 232, 0.1);
             }
         }
 
         small {
             color: $text-muted;
             font-size: 0.5rem;
-            line-height: 1.1;
+            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            min-height: 0.55rem;
         }
     }
 }
 
-// Сценарии - 3 в ряд
+// Сценарии
 .scenarioInputs {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.7rem;
+    gap: 0.75rem;
     margin-bottom: 1rem;
-    width: 100%;
-    overflow: hidden;
 
     label {
         display: flex;
         flex-direction: column;
-        gap: 0.3rem;
+        gap: 0.375rem;
         padding: 0.875rem;
         border: 1px solid;
         border-radius: $radius-sm;
         transition: all $transition;
         min-width: 0;
-        overflow: hidden;
 
         &:hover {
-            // transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         &:focus-within {
-            border-color: $accent-purple;
             box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
         }
 
         span {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 700;
             letter-spacing: 0.03em;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.3;
         }
 
         input {
@@ -301,11 +288,11 @@ $transition: 0.15s ease;
             border-radius: $radius-xs;
             color: $text-primary;
             background: $bg-input;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 500;
-            line-height: 1.2;
-            min-width: 0;
+            line-height: 1.3;
             transition: all $transition;
+            height: 32px;
             
             &:hover {
                 border-color: lighten(#343d4b, 10%);
@@ -313,26 +300,24 @@ $transition: 0.15s ease;
             
             &:focus {
                 outline: none;
-                box-shadow: 0 0 0 3px rgba(117, 103, 232, 0.1);
+                box-shadow: 0 0 0 2px rgba(117, 103, 232, 0.1);
             }
         }
 
         small {
             color: $text-muted;
-            font-size: 0.65rem;
-            line-height: 1.2;
+            font-size: 0.6rem;
+            line-height: 1.3;
         }
     }
 }
 
-// Карточки сценариев - 3 в ряд
+// Карточки сценариев
 .economicsGrid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.875rem;
+    gap: 0.75rem;
     margin-bottom: 1rem;
-    width: 100%;
-    overflow: hidden;
 
     article {
         padding: 1rem;
@@ -340,23 +325,21 @@ $transition: 0.15s ease;
         border-radius: $radius-md;
         transition: all $transition;
         min-width: 0;
-        overflow: hidden;
         backdrop-filter: blur(10px);
 
         &:hover {
-            // transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
         > span {
             display: block;
             color: $text-secondary;
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.04em;
             margin-bottom: 0.5rem;
-            line-height: 1;
+            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -364,10 +347,10 @@ $transition: 0.15s ease;
 
         > strong {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            margin-bottom: 0.625rem;
-            line-height: 1.2;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
         }
 
         dl {
@@ -393,7 +376,7 @@ $transition: 0.15s ease;
 
             dt {
                 color: $text-secondary;
-                font-size: 0.65rem;
+                font-size: 0.6rem;
                 font-weight: 500;
                 white-space: nowrap;
                 overflow: hidden;
@@ -402,7 +385,7 @@ $transition: 0.15s ease;
 
             dd {
                 margin: 0;
-                font-size: 0.7rem;
+                font-size: 0.65rem;
                 font-weight: 600;
                 color: $text-primary;
                 white-space: nowrap;
@@ -412,14 +395,12 @@ $transition: 0.15s ease;
     }
 }
 
-// Формулы - 2 в ряд
+// Формулы
 .economicsFormula {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.875rem;
+    gap: 0.75rem;
     margin-bottom: 1rem;
-    width: 100%;
-    overflow: hidden;
 
     > div {
         padding: 1rem;
@@ -427,7 +408,6 @@ $transition: 0.15s ease;
         border-radius: $radius-md;
         background: linear-gradient(145deg, rgba(117, 103, 232, 0.08), rgba(117, 103, 232, 0.02));
         min-width: 0;
-        overflow: hidden;
         transition: all $transition;
         backdrop-filter: blur(10px);
 
@@ -449,11 +429,11 @@ $transition: 0.15s ease;
         span {
             display: block;
             color: #9d93f1;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             font-weight: 700;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.3;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -463,9 +443,9 @@ $transition: 0.15s ease;
             display: block;
             margin-top: 0.375rem;
             color: $text-primary;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 600;
-            line-height: 1.2;
+            line-height: 1.4;
         }
 
         code {
@@ -473,8 +453,8 @@ $transition: 0.15s ease;
             margin-top: 0.375rem;
             padding: 0.5rem;
             color: #7ed1c7;
-            font-size: 0.65rem;
-            line-height: 1.3;
+            font-size: 0.6rem;
+            line-height: 1.4;
             background: rgba(0, 0, 0, 0.3);
             border-radius: $radius-xs;
             word-break: break-word;
@@ -485,8 +465,8 @@ $transition: 0.15s ease;
             padding-top: 0.375rem;
             border-top: 1px solid rgba(255, 255, 255, 0.04);
             color: $text-secondary;
-            font-size: 0.6rem;
-            line-height: 1.3;
+            font-size: 0.55rem;
+            line-height: 1.4;
         }
     }
 }
@@ -499,14 +479,13 @@ $transition: 0.15s ease;
     padding: 0.875rem 0;
     margin-bottom: 0.875rem;
     border-top: 1px solid $border-color;
-    overflow: hidden;
     
     span {
         display: flex;
         align-items: center;
         gap: 0.375rem;
         color: $text-secondary;
-        font-size: 0.65rem;
+        font-size: 0.6rem;
         transition: color $transition;
         
         &:hover {
@@ -533,9 +512,8 @@ $transition: 0.15s ease;
     border-radius: $radius-sm;
     color: $text-muted;
     background: $bg-secondary;
-    font-size: 0.6rem;
-    line-height: 1.3;
-    overflow: hidden;
+    font-size: 0.55rem;
+    line-height: 1.4;
 
     p {
         margin: 0;
@@ -547,81 +525,67 @@ $transition: 0.15s ease;
 }
 
 // Адаптивность
+@media (max-width: 1280px) {
+    .document {
+        max-width: 1000px; // Немного меньше на средних экранах
+    }
+}
+
 @media (max-width: 1024px) {
     .document {
-        max-width: 100%;
+        max-width: 100%; // На планшетах уже на всю ширину
     }
     
     .modelInputs {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0.4rem;
+        gap: 0.5rem;
         
         label {
-            padding: 0.4rem;
+            padding: 0.5rem;
             
             input {
-                height: 26px;
+                height: 28px;
             }
         }
     }
     
     .economicsFormula {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.625rem;
     }
 }
 
 @media (max-width: 768px) {
     .toolbar {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0.625rem;
+        padding: 0.75rem;
     }
 
     .toolbarActions {
-        width: 100%;
-        flex-wrap: nowrap;
-        gap: 0.2rem;
+        gap: 0.375rem;
         
         button {
-            flex: 0.1;
-            text-align: center;
-            min-width: 0;
-            padding: 0.25rem 0.3rem;
+            padding: 0.3rem 0.5rem;
             font-size: 0.55rem;
+            min-height: 26px;
         }
     }
 
     .pages {
-        padding: 0.625rem;
+        padding: 0.75rem;
     }
 
     .page {
-        padding: 0.875rem;
+        padding: 1rem;
     }
 
-    // На планшете показываем 3 в первом ряду и 2 во втором
     .modelInputs {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0.4rem;
-        
-        // Последние 2 элемента растягиваем
-        label:nth-child(4),
-        label:nth-child(5) {
-            grid-column: span 1.5;
-        }
+        gap: 0.5rem;
     }
 
-    // Оставляем 3 в ряд для сценариев на планшете
     .scenarioInputs,
     .economicsGrid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 0.625rem;
     }
 
-    // Формулы остаются в 2 колонки даже на планшете
     .economicsFormula {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 0.625rem;
         
         > div {
@@ -632,32 +596,28 @@ $transition: 0.15s ease;
 
 @media (max-width: 480px) {
     .toolbarActions {
-        gap: 0.15rem;
+        gap: 0.25rem;
         
         button {
-            min-width: 0;
             font-size: 0.5rem;
-            padding: 0.2rem 0.25rem;
-            min-height: 20px;
+            padding: 0.25rem 0.375rem;
+            min-height: 24px;
         }
     }
 
-    // На мобильном - 2 в ряд
     .modelInputs {
-        grid-template-columns: repeat(5, minmax(0, 1fr));
-        gap: 0.3rem;
-        
-        label:nth-child(4),
-        label:nth-child(5) {
-            grid-column: auto;
-        }
+        gap: 0.375rem;
         
         label {
-            padding: 0.3rem;
+            padding: 0.375rem;
             
             input {
-                height: 24px;
+                height: 26px;
                 font-size: 0.65rem;
+            }
+            
+            small {
+                display: none; // Скрываем подсказки на мобильных
             }
         }
     }
@@ -665,12 +625,12 @@ $transition: 0.15s ease;
     .scenarioInputs,
     .economicsGrid {
         grid-template-columns: 1fr;
+        gap: 0.5rem;
     }
     
-    // На очень маленьких экранах формулы могут стать в 1 колонку
     .economicsFormula {
         grid-template-columns: 1fr;
-        gap: 0.625rem;
+        gap: 0.5rem;
     }
 }
 
