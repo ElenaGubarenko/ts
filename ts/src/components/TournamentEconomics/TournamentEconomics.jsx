@@ -14,13 +14,15 @@ const translations = {
         documentTitle: 'Экономика турнира',
         pageTitle: 'Экономика и маржа',
         parameters: 'Параметры',
-        averageBet: 'Средняя ставка',
+        averageBet: 'Минимальная ставка',
+        averageBetHint: 'Рекомендуется указывать средний размер ставки за последние полгода, увеличенный на 10-20%',
         rtp: 'RTP, %',
+        rtpHint: 'Средний RTP по играм, участвующим в турнире',
         completionRate: 'Дистанция турнира',
         completionRateHint: 'Процент выполнения пакета заданий',
         financialGoals: 'Цели',
         desiredIncome: 'Доход, EUR',
-        desiredIncomeHint: 'Ожидаемый доход',
+        desiredIncomeHint: 'Ожидаемый чистый доход, из которого будет выплачен призовой фонд',
         prizePool: 'Призы, EUR',
         prizePoolHint: 'Призовой фонд (часть ожидаемого дохода)',
         scenarios: 'Сценарии',
@@ -28,18 +30,25 @@ const translations = {
         participants: 'участников',
         participantsLabel: 'уч.',
         spins: 'спинов',
+        spinsPerPlayer: 'спинов на игрока',
+        spinsTotal: 'спинов всего',
         netIncomePerPlayer: 'Доход/игрок',
+        netIncomeAll: 'Доход всего',
         turnover: 'Оборот',
+        turnoverPerPlayer: 'Оборот/игрок',
+        turnoverAll: 'Оборот всего',
         netIncome: 'Чистый доход',
+        netIncomePerPlayerFull: 'Чистый доход/игрок',
+        netIncomeAll: 'Чистый доход всего',
         margin: 'Маржа',
-        formula1Title: 'Доход с одного игрока',
+        formula1Title: 'Расчет ожидаемого дохода',
         formula1Desc: 'Сколько зарабатываем с каждого участника',
         formula1: 'ставка × спины × 4%',
-        formula1Hint: '4% — это комиссия казино при RTP 96%. Например: ставка 0.2 EUR × 100 спинов × 0.04 = 0.8 EUR с игрока',
-        formula2Title: 'Сколько нужно спинов',
+        formula1Hint: '4% — комиссия при RTP 96%',
+        formula2Title: 'Расчет необходимого кол-ва спинов',
         formula2Desc: 'Дистанция, которую должен пройти игрок',
-        formula2: 'доход с игрока ÷ (ставка × 4%)',
-        formula2Hint: 'Например: нужно заработать 5 EUR с игрока. При ставке 0.2 EUR: 5 ÷ (0.2 × 0.04) = 625 спинов',
+        formula2: 'ожидаемый доход ÷ (ставка × 4%)',
+        formula2Hint: 'Пример: 5 EUR ÷ (0.2 × 0.04) = 625 спинов',
         disclaimer1: '* Параметры сценария не добавляются в конфиг турнира.',
         disclaimer2: '** Расчет не учитывает повторные попытки, бонусные покупки и операционные расходы.',
         print: 'Печать',
@@ -55,13 +64,15 @@ const translations = {
         documentTitle: 'Tournament Economics',
         pageTitle: 'Economics and Margin',
         parameters: 'Parameters',
-        averageBet: 'Avg bet',
+        averageBet: 'Min bet',
+        averageBetHint: 'Recommended to use average bet size for the last 6 months, increased by 10-20%',
         rtp: 'RTP, %',
+        rtpHint: 'Average RTP across games participating in the tournament',
         completionRate: 'Tournament distance',
         completionRateHint: 'Percentage of task package completion',
         financialGoals: 'Goals',
         desiredIncome: 'Income, EUR',
-        desiredIncomeHint: 'Expected income',
+        desiredIncomeHint: 'Expected net income from which the prize pool will be paid',
         prizePool: 'Prizes, EUR',
         prizePoolHint: 'Prize pool (part of expected income)',
         scenarios: 'Scenarios',
@@ -69,18 +80,25 @@ const translations = {
         participants: 'participants',
         participantsLabel: 'part.',
         spins: 'spins',
+        spinsPerPlayer: 'spins per player',
+        spinsTotal: 'total spins',
         netIncomePerPlayer: 'Income/player',
+        netIncomeAll: 'Total income',
         turnover: 'Turnover',
+        turnoverPerPlayer: 'Turnover/player',
+        turnoverAll: 'Total turnover',
         netIncome: 'Net income',
+        netIncomePerPlayerFull: 'Net income/player',
+        netIncomeAll: 'Total net income',
         margin: 'Margin',
-        formula1Title: 'Income per player',
+        formula1Title: 'Expected income calculation',
         formula1Desc: 'How much we earn from each participant',
         formula1: 'bet × spins × 4%',
-        formula1Hint: '4% is the casino commission at 96% RTP. Example: bet 0.2 EUR × 100 spins × 0.04 = 0.8 EUR per player',
-        formula2Title: 'Required spins',
+        formula1Hint: '4% is the commission at 96% RTP',
+        formula2Title: 'Required spins calculation',
         formula2Desc: 'Distance the player must complete',
-        formula2: 'income per player ÷ (bet × 4%)',
-        formula2Hint: 'Example: need to earn 5 EUR per player. At 0.2 EUR bet: 5 ÷ (0.2 × 0.04) = 625 spins',
+        formula2: 'expected income ÷ (bet × 4%)',
+        formula2Hint: 'Example: 5 EUR ÷ (0.2 × 0.04) = 625 spins',
         disclaimer1: '* Scenario params are not added to tournament config.',
         disclaimer2: '** Calculation excludes retries, bonus buys and operational costs.',
         print: 'Print',
@@ -96,31 +114,33 @@ const translations = {
 // Цвета для сценариев
 const scenarioColors = [
     { 
-        input: 'rgba(117, 103, 232, 0.2)', 
-        inputBorder: 'rgba(117, 103, 232, 0.5)',
-        card: 'rgba(117, 103, 232, 0.08)',
-        cardBorder: 'rgba(117, 103, 232, 0.25)',
-        accent: '#a99ff5'
+        input: 'rgba(117, 103, 232, 0.15)', 
+        inputBorder: 'rgba(117, 103, 232, 0.4)',
+        card: 'rgba(117, 103, 232, 0.06)',
+        cardBorder: 'rgba(117, 103, 232, 0.2)',
+        accent: '#a99ff5',
+        headerBg: 'rgba(117, 103, 232, 0.12)'
     },
     { 
-        input: 'rgba(53, 198, 181, 0.15)', 
-        inputBorder: 'rgba(53, 198, 181, 0.5)',
-        card: 'rgba(53, 198, 181, 0.08)',
-        cardBorder: 'rgba(53, 198, 181, 0.25)',
-        accent: '#7ed1c7'
+        input: 'rgba(53, 198, 181, 0.12)', 
+        inputBorder: 'rgba(53, 198, 181, 0.4)',
+        card: 'rgba(53, 198, 181, 0.06)',
+        cardBorder: 'rgba(53, 198, 181, 0.2)',
+        accent: '#7ed1c7',
+        headerBg: 'rgba(53, 198, 181, 0.12)'
     },
     { 
-        input: 'rgba(100, 143, 179, 0.15)', 
-        inputBorder: 'rgba(100, 143, 179, 0.5)',
-        card: 'rgba(100, 143, 179, 0.08)',
-        cardBorder: 'rgba(100, 143, 179, 0.25)',
-        accent: '#8fb3d9'
+        input: 'rgba(100, 143, 179, 0.12)', 
+        inputBorder: 'rgba(100, 143, 179, 0.4)',
+        card: 'rgba(100, 143, 179, 0.06)',
+        cardBorder: 'rgba(100, 143, 179, 0.2)',
+        accent: '#8fb3d9',
+        headerBg: 'rgba(100, 143, 179, 0.12)'
     },
 ];
 
 function TournamentEconomics() {
     const [language, setLanguage] = useState('ru');
-    // Храним значения как строки, чтобы можно было очистить поле
     const [averageBet, setAverageBet] = useState('0.2');
     const [expectedRtp, setExpectedRtp] = useState('96');
     const [participantCompletionRate, setParticipantCompletionRate] = useState('100');
@@ -135,14 +155,13 @@ function TournamentEconomics() {
 
     const updateScenario = (index, value) => {
         const scenarios = [...marginParticipantScenarios];
-        scenarios[index] = value; // Сохраняем как строку
+        scenarios[index] = value;
         setMarginParticipantScenarios(scenarios);
     };
 
     const handleIncomeChange = (value) => {
         setDesiredTournamentIncome(value);
         const income = Number(value) || 0;
-        // Устанавливаем prizePool только если value не пустое
         setPrizePool(value === '' ? '' : String(income * 0.5));
     };
 
@@ -154,13 +173,11 @@ function TournamentEconomics() {
         setIsSaving(true);
         
         try {
-            // Динамически импортируем библиотеки
             const html2canvas = (await import('html2canvas')).default;
             const { jsPDF } = await import('jspdf');
             
             const element = document.querySelector(`.${styles.page}`);
             
-            // Создаем canvas из элемента
             const canvas = await html2canvas(element, {
                 scale: 2,
                 useCORS: true,
@@ -168,20 +185,16 @@ function TournamentEconomics() {
                 backgroundColor: '#10141b',
             });
             
-            // Получаем размеры
             const imgData = canvas.toDataURL('image/png');
-            const imgWidth = 210; // A4 width in mm
-            const pageHeight = 297; // A4 height in mm
+            const imgWidth = 210;
+            const pageHeight = 297;
             const imgHeight = canvas.height * imgWidth / canvas.width;
             
-            // Создаем PDF
             const pdf = new jsPDF('p', 'mm', 'a4');
             
-            // Если изображение больше одной страницы, масштабируем
             if (imgHeight <= pageHeight) {
                 pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
             } else {
-                // Масштабируем, чтобы влезло на одну страницу
                 const scale = Math.min(imgWidth / canvas.width, pageHeight / canvas.height);
                 const scaledWidth = canvas.width * scale;
                 const scaledHeight = canvas.height * scale;
@@ -191,7 +204,6 @@ function TournamentEconomics() {
                 pdf.addImage(imgData, 'PNG', x, y, scaledWidth, scaledHeight);
             }
             
-            // Сохраняем PDF
             pdf.save(`${t.fileName}.pdf`);
             
         } catch (error) {
@@ -207,25 +219,25 @@ function TournamentEconomics() {
     const targetIncome = Number(desiredTournamentIncome) || 0;
     const targetPrizePool = Number(prizePool) || 0;
     const bet = Number(averageBet) || 0;
-    const marginRate = (100 - rtp) / 100; // 0.04 при RTP 96%
+    const marginRate = (100 - rtp) / 100;
     const netIncome = Math.max(0, targetIncome - targetPrizePool);
 
     const calculateScenario = (participantsStr) => {
         const participants = Number(participantsStr) || 0;
         
-        // Чистый доход с одного игрока (не зависит от процента выполнения)
         const netIncomePerPlayer = participants > 0 ? netIncome / participants : 0;
         
-        // Спины = доход с игрока / (ставка × маржа)
         const spinsPerPlayer = bet > 0 && marginRate > 0
             ? netIncomePerPlayer / (bet * marginRate)
             : 0;
 
-        // Оборот с учетом процента выполнения дистанции
-        const turnover = participants * spinsPerPlayer * bet * completionRate / 100;
+        const turnoverPerPlayer = spinsPerPlayer * bet * completionRate / 100;
+        const turnoverAll = turnoverPerPlayer * participants;
         
-        // Общий доход = оборот × маржа
-        const grossRevenue = turnover * marginRate;
+        const grossRevenuePerPlayer = turnoverPerPlayer * marginRate;
+        const grossRevenueAll = grossRevenuePerPlayer * participants;
+        
+        const totalSpins = spinsPerPlayer * participants;
         
         const marginRatio = marginRate * 100;
 
@@ -233,8 +245,11 @@ function TournamentEconomics() {
             participants,
             netIncomePerPlayer,
             spinsPerPlayer,
-            turnover,
-            grossRevenue,
+            totalSpins,
+            turnoverPerPlayer,
+            turnoverAll,
+            grossRevenuePerPlayer,
+            grossRevenueAll,
             marginRatio,
         };
     };
@@ -277,100 +292,103 @@ function TournamentEconomics() {
 
             <div className={styles.pages}>
                 <article className={`${styles.page} ${styles.visible}`}>
-                    <header>
-                        <div>
-                            <span>TOURNAMENT-STUDIO · TOURNAMENT</span>
-                            <h3>{t.pageTitle}</h3>
-                        </div>
-                        <strong>01/01</strong>
-                    </header>
-
-                    {/* Основные параметры */}
-                    <div className={styles.modelInputs}>
-                        <label>
-                            <span>{t.averageBet}</span>
-                            <input
-                                type="text"
-                                inputMode="decimal"
-                                value={averageBet}
-                                onChange={(e) => setAverageBet(e.target.value)}
-                                placeholder="0"
-                            />
-                        </label>
-                        <label>
-                            <span>{t.rtp}</span>
-                            <input
-                                type="text"
-                                inputMode="numeric"
-                                value={expectedRtp}
-                                onChange={(e) => setExpectedRtp(e.target.value)}
-                                placeholder="0"
-                            />
-                        </label>
-                        <label>
-                            <span>{t.completionRate}</span>
-                            <input
-                                type="text"
-                                inputMode="numeric"
-                                value={participantCompletionRate}
-                                onChange={(e) => setParticipantCompletionRate(e.target.value)}
-                                placeholder="0"
-                            />
-                            <small>{t.completionRateHint}</small>
-                        </label>
-                        <label>
-                            <span>{t.desiredIncome}</span>
-                            <input
-                                type="text"
-                                inputMode="decimal"
-                                value={desiredTournamentIncome}
-                                onChange={(e) => handleIncomeChange(e.target.value)}
-                                placeholder="0"
-                            />
-                            <small>{t.desiredIncomeHint}</small>
-                        </label>
-                        <label>
-                            <span>{t.prizePool}</span>
-                            <input
-                                type="text"
-                                inputMode="decimal"
-                                value={prizePool}
-                                onChange={(e) => setPrizePool(e.target.value)}
-                                placeholder="0"
-                            />
-                            <small>{t.prizePoolHint}</small>
-                        </label>
-                    </div>
-
-                    {/* Сценарии на отдельной строке */}
-                    <div className={styles.scenarioInputs}>
-                        {marginParticipantScenarios.map((participants, index) => (
-                            <label 
-                                key={`scenario-${index}`}
-                                style={{
-                                    background: scenarioColors[index].input,
-                                    borderColor: scenarioColors[index].inputBorder,
-                                }}
-                            >
-                                <span style={{ color: scenarioColors[index].accent }}>
-                                    {t.scenario} {index + 1}
-                                </span>
+                    <section className={styles.section}>
+                        <h4 className={styles.sectionTitle}>{t.parameters}</h4>
+                        <div className={styles.modelInputs}>
+                            <label>
+                                <span>{t.averageBet}</span>
+                                <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    value={averageBet}
+                                    onChange={(e) => setAverageBet(e.target.value)}
+                                    placeholder="0"
+                                />
+                                <small>{t.averageBetHint}</small>
+                            </label>
+                            <label>
+                                <span>{t.rtp}</span>
                                 <input
                                     type="text"
                                     inputMode="numeric"
-                                    value={participants}
-                                    onChange={(e) => updateScenario(index, e.target.value)}
+                                    value={expectedRtp}
+                                    onChange={(e) => setExpectedRtp(e.target.value)}
                                     placeholder="0"
+                                />
+                                <small>{t.rtpHint}</small>
+                            </label>
+                            <label>
+                                <span>{t.completionRate}</span>
+                                <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    value={participantCompletionRate}
+                                    onChange={(e) => setParticipantCompletionRate(e.target.value)}
+                                    placeholder="0"
+                                />
+                                <small>{t.completionRateHint}</small>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section className={styles.section}>
+                        <h4 className={styles.sectionTitle}>{t.financialGoals}</h4>
+                        <div className={styles.financialInputs}>
+                            <label>
+                                <span>{t.desiredIncome}</span>
+                                <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    value={desiredTournamentIncome}
+                                    onChange={(e) => handleIncomeChange(e.target.value)}
+                                    placeholder="0"
+                                />
+                                <small>{t.desiredIncomeHint}</small>
+                            </label>
+                            <label>
+                                <span>{t.prizePool}</span>
+                                <input
+                                    type="text"
+                                    inputMode="decimal"
+                                    value={prizePool}
+                                    onChange={(e) => setPrizePool(e.target.value)}
+                                    placeholder="0"
+                                />
+                                <small>{t.prizePoolHint}</small>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section className={styles.section}>
+                        <h4 className={styles.sectionTitle}>{t.scenarios}</h4>
+                        <div className={styles.scenarioInputs}>
+                            {marginParticipantScenarios.map((participants, index) => (
+                                <label 
+                                    key={`scenario-${index}`}
                                     style={{
+                                        background: scenarioColors[index].input,
                                         borderColor: scenarioColors[index].inputBorder,
                                     }}
-                                />
-                                <small>{t.participants}</small>
-                            </label>
-                        ))}
-                    </div>
+                                >
+                                    <span style={{ color: scenarioColors[index].accent }}>
+                                        {t.scenario} {index + 1}
+                                    </span>
+                                    <input
+                                        type="text"
+                                        inputMode="numeric"
+                                        value={participants}
+                                        onChange={(e) => updateScenario(index, e.target.value)}
+                                        placeholder="0"
+                                        style={{
+                                            borderColor: scenarioColors[index].inputBorder,
+                                        }}
+                                    />
+                                    <small>{t.participants}</small>
+                                </label>
+                            ))}
+                        </div>
+                    </section>
 
-                    {/* Карточки сценариев с цветовой кодировкой */}
                     <div className={styles.economicsGrid}>
                         {marginParticipantScenarios.map((participants, index) => {
                             const scenario = calculateScenario(participants);
@@ -384,28 +402,64 @@ function TournamentEconomics() {
                                         borderColor: colors.cardBorder,
                                     }}
                                 >
-                                    <span style={{ color: colors.accent }}>
-                                        {t.scenario} {index + 1} · {formatNumber(scenario.participants)} {t.participantsLabel}
-                                    </span>
-                                    <strong style={{ color: colors.accent }}>
-                                        {formatNumber(scenario.spinsPerPlayer)} {t.spins}
-                                    </strong>
+                                    <div 
+                                        className={styles.cardHeader}
+                                        style={{
+                                            background: colors.headerBg,
+                                            borderBottom: `1px solid ${colors.cardBorder}`
+                                        }}
+                                    >
+                                        <span style={{ color: colors.accent }}>
+                                            {t.scenario} {index + 1} · {formatNumber(scenario.participants)} {t.participantsLabel}
+                                        </span>
+                                        <strong style={{ color: colors.accent }}>
+                                            {formatNumber(scenario.spinsPerPlayer)} {t.spinsPerPlayer}
+                                            <small className={styles.totalValue}>
+                                                ({formatNumber(scenario.totalSpins)} {t.spinsTotal})
+                                            </small>
+                                        </strong>
+                                    </div>
                                     <dl>
                                         <div>
                                             <dt>{t.netIncomePerPlayer}</dt>
-                                            <dd>{formatMoney(scenario.netIncomePerPlayer)}</dd>
+                                            <dd>
+                                                <span className={styles.mainValue}>
+                                                    {formatMoney(scenario.netIncomePerPlayer)}
+                                                </span>
+                                                <span className={styles.subValue}>
+                                                    {formatMoney(scenario.grossRevenuePerPlayer)} · {t.netIncomePerPlayerFull}
+                                                </span>
+                                            </dd>
                                         </div>
                                         <div>
                                             <dt>{t.turnover}</dt>
-                                            <dd>{formatMoney(scenario.turnover)}</dd>
+                                            <dd>
+                                                <span className={styles.mainValue}>
+                                                    {formatMoney(scenario.turnoverPerPlayer)}
+                                                </span>
+                                                <span className={styles.subValue}>
+                                                    {formatMoney(scenario.turnoverAll)} · {t.turnoverAll}
+                                                </span>
+                                            </dd>
                                         </div>
                                         <div>
                                             <dt>{t.netIncome}</dt>
-                                            <dd>{formatMoney(scenario.grossRevenue)}</dd>
+                                            <dd>
+                                                <span className={styles.mainValue}>
+                                                    {formatMoney(scenario.grossRevenuePerPlayer)}
+                                                </span>
+                                                <span className={styles.subValue}>
+                                                    {formatMoney(scenario.grossRevenueAll)} · {t.netIncomeAll}
+                                                </span>
+                                            </dd>
                                         </div>
                                         <div>
                                             <dt>{t.margin}</dt>
-                                            <dd>{formatNumber(scenario.marginRatio)}%</dd>
+                                            <dd>
+                                                <span className={styles.mainValue}>
+                                                    {formatNumber(scenario.marginRatio)}%
+                                                </span>
+                                            </dd>
                                         </div>
                                     </dl>
                                 </article>
@@ -413,7 +467,6 @@ function TournamentEconomics() {
                         })}
                     </div>
 
-                    {/* Формулы с понятными объяснениями */}
                     <div className={styles.economicsFormula}>
                         <div>
                             <span>01 · {t.formula1Title}</span>
